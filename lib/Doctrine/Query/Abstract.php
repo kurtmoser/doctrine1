@@ -650,7 +650,11 @@ abstract class Doctrine_Query_Abstract
             }
 
             $identifier = $this->_conn->quoteIdentifier($tableAlias . $field); 
-            $retVal .= $identifier . ' = ' . $this->_conn->quote($value);
+            if (is_null ($value)) {
+                $retVal .= $identifier . ' IS NULL';
+            } else {
+                $retVal .= $identifier . ' = ' . $this->_conn->quote($value);
+            }
         }
 
         return $retVal;
