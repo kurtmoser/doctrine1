@@ -19,7 +19,9 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
+if (!class_exists('Doctrine_Core')) {
+    require_once 'Doctrine/Core.php';
+}
 
 /**
  * This class only exists for backwards compatability. All code was moved to 
