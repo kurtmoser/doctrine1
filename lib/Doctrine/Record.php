@@ -825,6 +825,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
                 unset($vars['_data'][$k]);
             } else {
                 switch ($this->_table->getTypeOf($k)) {
+                    case 'json':
+                        $vars['_data'][$k] = json_encode($vars['_data'][$k]);
+                        break;
                     case 'array':
                     case 'object':
                         $vars['_data'][$k] = serialize($vars['_data'][$k]);
@@ -874,6 +877,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
 
         foreach ($this->_data as $k => $v) {
             switch ($this->_table->getTypeOf($k)) {
+                case 'json':
+                    $vars['_data'][$k] = json_decode($vars['_data'][$k], true);
+                    break;
                 case 'array':
                 case 'object':
                     $this->_data[$k] = unserialize($this->_data[$k]);
@@ -1824,6 +1830,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
             }
 
             switch ($type) {
+                case 'json':
+                    $a[$field] = json_encode($this->_data[$field]);
+                    break;
                 case 'array':
                 case 'object':
                     $a[$field] = serialize($this->_data[$field]);

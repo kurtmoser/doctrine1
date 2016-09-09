@@ -178,6 +178,9 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
 
                 return $fixed ? ($length ? 'CHAR(' . $length . ')' : 'CHAR(255)')
                     : ($length ? 'VARCHAR(' . $length . ')' : 'TEXT');
+            case 'json':
+              //TODO: JSON
+              return 'TEXT';
             case 'array':
             case 'object':
             case 'clob':

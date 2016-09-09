@@ -2338,6 +2338,15 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
                 case 'boolean':
                     return (boolean) $value;
                 break;
+                case 'json':
+                    if (is_string($value)) {
+                        $value = empty($value) ? null:json_decode($value, true);
+
+                        if ($value === false) {
+                            throw new Doctrine_Table_Exception('Json_Decode of ' . $fieldName . ' failed.');
+                        }
+                        return $value;
+                    }
                 case 'array':
                 case 'object':
                     if (is_string($value)) {
