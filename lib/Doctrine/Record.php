@@ -968,7 +968,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      *
      * @throws Doctrine_Record_Exception        When the refresh operation fails (when the database row
      *                                          this record represents does not exist anymore)
-     * @return boolean
+     *
+     * @return false|Doctrine_Record false if the record is not saved yet
      */
     public function refresh($deep = false)
     {
@@ -1019,10 +1020,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * refresh
      * refresh data of related objects from the database
      *
-     * @param string $name              name of a related component.
-     *                                  if set, this method only refreshes the specified related component
-     *
-     * @return Doctrine_Record          this object
+     * @param string $name name of a related component. if set, this method only refreshes
+     *                     the specified related component
      */
     public function refreshRelated($name = null)
     {
@@ -2019,6 +2018,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
         if ($refresh) {
             $this->refresh();
         }
+
+        return $this;
     }
 
     /**

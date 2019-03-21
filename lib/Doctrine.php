@@ -35,6 +35,10 @@ if (!class_exists('Doctrine_Core')) {
  * @since       1.0
  * @version     $Revision: 7490 $
  */
-class Doctrine extends Doctrine_Core
-{
+
+if (!class_exists('Doctrine')) {
+    class Doctrine extends Doctrine_Core
+    {
+        
+    }
 }
